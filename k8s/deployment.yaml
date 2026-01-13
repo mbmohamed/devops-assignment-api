@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: assignment-api
-        image: assignment-api:latest
-        imagePullPolicy: IfNotPresent
+        image: m0hamed112/assignment-api:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
           name: http
