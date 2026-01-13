@@ -154,3 +154,10 @@ def grade_assignment(assignment_id: str, grade_data: GradeSubmission):
     assignments_db[assignment_id]["graded_at"] = datetime.utcnow().isoformat()
     
     return assignments_db[assignment_id]
+
+@app.delete("/assignments/{assignment_id}")
+def delete_assignment(assignment_id: str):
+    """Delete an assignment (intentional mistake: no error handling)"""
+    # This will crash if assignment_id is not found!
+    del assignments_db[assignment_id]
+    return {"message": "Assignment deleted"}

@@ -27,6 +27,7 @@ wheels/
 .pytest_cache/
 .coverage
 htmlcov/
+.mypy_cache/
 
 # IDEs
 .vscode/
@@ -45,3 +46,9 @@ Thumbs.db
 
 # Logs
 *.log
+
+# CI/CD & Security Artifacts
+bandit-report.json
+report_html.html
+assignment-api.tar
+kubeconfig
