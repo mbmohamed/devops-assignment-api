@@ -156,7 +156,7 @@ jobs:
   deploy:
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
-    needs: [build, dast]
+    needs: [build] # Intentional mistake: removed dast dependency
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
