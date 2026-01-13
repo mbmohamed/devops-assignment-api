@@ -65,16 +65,8 @@ async def log_requests(request, call_next):
     # Calculate duration
     duration = time.time() - start_time
     
-    # Structured logging
-    log_data = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "request_id": request_id,
-        "method": request.method,
-        "path": request.url.path,
-        "status_code": response.status_code,
-        "duration_ms": round(duration * 1000, 2)
-    }
-    logger.info(json.dumps(log_data))
+    # Unstructured logging (Intentional mistake)
+    logger.info(f"Request: {request.method} {request.url.path} - Status: {response.status_code} - Duration: {round(duration * 1000, 2)}ms")
     
     # Update metrics
     REQUEST_COUNT.labels(method=request.method, endpoint=request.url.path, status=response.status_code).inc()
