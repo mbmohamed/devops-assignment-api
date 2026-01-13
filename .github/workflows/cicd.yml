@@ -170,15 +170,19 @@ jobs:
         echo "For minikube/local testing, this step can be skipped"
         echo "For cloud deployment, configure kubectl and apply manifests"
     
-    # Uncomment and configure for actual cloud deployment
+    # - name: Update Kubernetes Manifest
+    #   run: |
+    #     sed -i "s|image: assignment-api:latest|image: ${{ secrets.DOCKER_USERNAME }}/assignment-api:${{ github.sha }}|g" k8s/deployment.yaml
+    #     cat k8s/deployment.yaml
+    
     # - name: Set up kubectl
     #   uses: azure/setup-kubectl@v3
-    # 
+    
     # - name: Configure kubectl
     #   run: |
     #     echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig
     #     export KUBECONFIG=kubeconfig
-    # 
+    
     # - name: Deploy to Kubernetes
     #   run: |
     #     kubectl apply -f k8s/deployment.yaml
