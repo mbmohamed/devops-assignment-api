@@ -89,6 +89,10 @@ def root():
     """Root endpoint"""
     return {"message": "Assignment Submission API", "version": "1.0.0"}
 
+@app.get("/health")
+def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
 
 @app.get("/metrics")
 def metrics():
