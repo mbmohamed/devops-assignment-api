@@ -158,6 +158,7 @@ def grade_assignment(assignment_id: str, grade_data: GradeSubmission):
 @app.delete("/assignments/{assignment_id}")
 def delete_assignment(assignment_id: str):
     """Delete an assignment (intentional mistake: no error handling)"""
-    # This will crash if assignment_id is not found!
+    if assignment_id not in assignments_db:
+        raise HTTPException(status_code=404, detail="Assignment not found")
     del assignments_db[assignment_id]
     return {"message": "Assignment deleted"}
