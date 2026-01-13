@@ -24,8 +24,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pylint bandit
+        python -m pip install -r requirements.txt
+        python -m pip install pylint bandit pytest
     
     - name: Lint with pylint
       run: |
@@ -33,7 +33,7 @@ jobs:
     
     - name: Run unit tests
       run: |
-        pytest tests/ -v --tb=short
+        python -m pytest tests/ -v --tb=short
   
   # Job 2: SAST Security Scan
   sast:
@@ -51,15 +51,15 @@ jobs:
         python-version: '3.12'
     
     - name: Install Bandit
-      run: pip install bandit
+      run: python -m pip install bandit
     
     - name: Run Bandit SAST scan
       run: |
-        bandit -r app.py -f json -o bandit-report.json || true
-        bandit -r app.py
+        python -m bandit -r app.py -f json -o bandit-report.json || true
+        python -m bandit -r app.py
     
     - name: Upload SAST results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: sast-report
         path: bandit-report.json
@@ -102,7 +102,7 @@ jobs:
         docker save assignment-api:latest -o assignment-api.tar
     
     - name: Upload Docker image artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: docker-image
         path: assignment-api.tar
@@ -118,7 +118,7 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Download Docker image
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: docker-image
     
@@ -146,7 +146,7 @@ jobs:
       run: docker stop test-api && docker rm test-api
     
     - name: Upload DAST results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: dast-report
