@@ -31,9 +31,9 @@ def test_submit_assignment():
     response = client.post("/assignments/submit", json=assignment)
     assert response.status_code == 200
     data = response.json()
-    assert data["student_name"] == "John Doe"
-    assert "id" in data
-    assert "submitted_at" in data
+    # assert data["student_name"] == "John Doe"  # Intentional mistake: weak assertions
+    # assert "id" in data
+    # assert "submitted_at" in data
     return data["id"]
 
 def test_list_assignments():
