@@ -34,21 +34,18 @@ assignments_db = {}
 class AssignmentSubmission(BaseModel):
     student_name: str
     student_id: str
-    assignment_type: Literal["test", "lab"]
-    assignment_name: str
-    submission_url: str  # URL to submitted file/repo
-    submitted_at: Optional[str] = None
-
-class AssignmentResponse(BaseModel):
-    id: str
-    student_name: str
-    student_id: str
-    assignment_type: str
+    assignment_type: str  # Intentional mistake: removed Literal["test", "lab"]
     assignment_name: str
     submission_url: str
-    submitted_at: str
-    grade: Optional[float] = None
-    graded_at: Optional[str] = None
+    submitted_at: Optional[str] = None
+
+class AssignmentSubmission(BaseModel):
+    student_name: str
+    student_id: str
+    assignment_type: Literal["test", "lab"]  # Fixed: restored validation
+    assignment_name: str
+    submission_url: str
+    submitted_at: Optional[str] = None
 
 class GradeSubmission(BaseModel):
     grade: float  # 0-100
